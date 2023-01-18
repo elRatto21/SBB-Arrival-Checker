@@ -2,4 +2,6 @@
 .classpath
 .project
 .gitattributes
+.idea
+.project
 /bin/
