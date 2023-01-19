@@ -60,9 +60,7 @@ public class Downloader {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						if (byteCount % 1000 == 0) {
 							LoadingScreen.updateProgress(byteCount);
-						}
 					}
 				});
 				// "Downloading"
