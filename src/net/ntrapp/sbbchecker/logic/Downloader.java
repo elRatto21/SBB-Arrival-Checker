@@ -14,6 +14,13 @@ import javax.swing.SwingUtilities;
 
 import net.ntrapp.sbbchecker.gui.LoadingScreen;
 
+/**
+ * This class manages the download of the dataset
+ * 
+ * @author Niklas Trapp
+ * @version 1.0.5
+ * @since 1.0
+ */
 public class Downloader {
 
 	private BufferedInputStream in;
@@ -21,12 +28,17 @@ public class Downloader {
 	// Yesterdays date formatted as dd.MM.yyyy
 	private static final String DATE = LocalDate.now().minus(1, ChronoUnit.DAYS).format(DATE_FORMAT);
 	private File tempFile = new File(String.format("./dataset/%s.csv", DATE));
+	private File tempDir = new File("./dataset/");
 
 	// TODO: Implement method to find the real size, currently to lazy so just
 	// assuming the dataset is never bigger than 20MB
 	private static final int DOWNLOAD_SIZE = 20000;
 
 	public Downloader() throws MalformedURLException, IOException {
+		// Checks if the dataset dir exists, if not creates it
+		if (!tempDir.exists()) {
+			new File("./dataset/").mkdirs();
+		}
 		// Checks if the dataset from yesterday already exists
 		if (!tempFile.exists()) {
 			// Prints out that the download starts
