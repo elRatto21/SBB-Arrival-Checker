@@ -34,7 +34,7 @@ public class Downloader {
 	// assuming the dataset is never bigger than 20MB
 	private static final int DOWNLOAD_SIZE = 20000;
 
-	public Downloader() throws MalformedURLException, IOException {
+	public Downloader() throws MalformedURLException, IOException, InterruptedException {
 		// Checks if the dataset dir exists, if not creates it
 		if (!tempDir.exists()) {
 			new File("./dataset/").mkdirs();
@@ -60,7 +60,7 @@ public class Downloader {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-							LoadingScreen.updateProgress(byteCount);
+							LoadingScreen.updateDownloadProgress(byteCount);
 					}
 				});
 				// "Downloading"
@@ -68,7 +68,8 @@ public class Downloader {
 			}
 			// Download finished, updating ProgressBar to 100%
 			System.out.println("Download finished");
-			LoadingScreen.updateProgress(DOWNLOAD_SIZE);
+			LoadingScreen.updateDownloadProgress(DOWNLOAD_SIZE);
+			LoadingScreen.downloadFinishedStartParser();
 			fileOutputStream.close();
 		} else {
 			System.out.println("Dataset already exists");
