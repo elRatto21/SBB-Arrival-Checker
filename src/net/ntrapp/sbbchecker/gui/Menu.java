@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import javax.swing.*;
 
 public class Menu {
@@ -13,12 +16,14 @@ public class Menu {
 	private JFrame frame;
 	private JLabel heading; // [0] == Heading
 	private JButton submit;
+	private JLabel placeholder = new JLabel();
 	private Container c;
 
 	private Menu() {
 		setupFrame();
 		setupStart();
 		setupHeading();
+		c.add(placeholder);
 	}
 
 	public static Menu getInstance() {
@@ -57,13 +62,26 @@ public class Menu {
 		submit.setVisible(true);
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				submitPressed();
+				try {
+					try {
+						submitPressed();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		c.add(submit);
 	}
 
-	private void submitPressed() {
+	private void submitPressed() throws MalformedURLException, IOException, InterruptedException {
 		disable();
 		LoadingScreen.getLoadingScreen();
 	}
@@ -74,6 +92,7 @@ public class Menu {
 
 	private void disable() {
 		submit.setVisible(false);
+		heading.setVisible(false);
 	}
 
 }
