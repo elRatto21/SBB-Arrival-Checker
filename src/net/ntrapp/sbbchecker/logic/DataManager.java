@@ -1,6 +1,9 @@
 package net.ntrapp.sbbchecker.logic;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * This class manages the necessary data including:
@@ -18,6 +21,9 @@ public class DataManager {
 	private int arrivalLateCount;
 
 	private static DataManager datamanager_instance = null;
+	
+	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyy");
+	private static final String DATE = LocalDate.now().minus(1, ChronoUnit.DAYS).format(DATE_FORMAT);
 
 	private DataManager() {
 		this.arrivalCount = 0;
@@ -41,7 +47,7 @@ public class DataManager {
 	 * @since 1.0
 	 */
 	public File getFile() {
-		return new File("./dataset/ist-daten-sbb.csv");
+		return new File(String.format("./dataset/%s.csv", DATE));
 	}
 
 	/**
