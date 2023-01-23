@@ -65,7 +65,7 @@ public class LoadingScreen {
 		parsingText.setVisible(false);
 		c.add(parsingText);
 		
-		result.setBounds(225, 175, 200, 100);
+		result.setBounds(15, 175, 600, 100);
 		result.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 30));
 		result.setForeground(Color.WHITE);
 		result.setVisible(false);
@@ -131,8 +131,8 @@ public class LoadingScreen {
 	public static void parsingFinished() {
 		parsingProgress.setVisible(false);
 		parsingText.setVisible(false);
-		result.setText(String.format("%s of %s arrived late", dm.getArrivalLateCount(), dm.getArrivalCount()));
+		result.setText(String.format("%s of %s arrived >1 minute late 🤡", dm.getArrivalLateCount(), dm.getArrivalCount()));
 		result.setVisible(true);
-		System.out.println("Parsing finished\nOutput: '" + String.format("%s of %s arrived late", dm.getArrivalLateCount(), dm.getArrivalCount()) + "'");
+		System.out.println("Parsing finished\nOutput: '" + String.format("%s of %s arrived >1 minute late 🤡", dm.getArrivalLateCount(), dm.getArrivalCount()) + "'");
 	}
 }
